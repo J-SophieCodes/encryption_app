@@ -1,30 +1,17 @@
-require('dotenv').config();
-const parseKeys = require('./src/parseKeys');
-
-const DOC = {
-  folder: process.env.FILE_LOCATION,
-  name: process.env.FILE_NAME,
-  save_as: process.env.SAVE_LOCATION
-}
-
-const KEYS = parseKeys();
-const regexp = new RegExp(KEYS.join("|"), "g");
-
 const { pipeline } = require('stream');
 const fs = require('fs');
 const es = require('event-stream');
+const encryptLine = require('./src/encryptLine');
+const errorHandler = require('./src/errorHandler');
+const File = require('./src/fileClass');
+
+const file = new File();
 
 pipeline(
-  fs.createReadStream(DOC.folder + DOC.name + ".txt"),
-  es.split(),
-  es.mapSync(line => line.replace(regexp, "XXXX")),
-  es.join("\n"),
-  fs.createWriteStream(DOC.save_as + DOC.name + "_censored.txt"),
-  (err) => {
-    if (err) {
-      console.error('Pipeline failed', err);
-    } else {
-      console.log('Pipeline succeeded');
-    }
-  }
+  fs.createReadStream(file.path),           // read from file
+  es.split(),                               // split stream to break on newlines
+  es.mapSync(encryptLine),                  // encrypt keywords in each line
+  es.join("\n"),                            // join lines with newline separator
+  fs.createWriteStream(file.saveToPath),    // write into new file
+  errorHandler
 );
