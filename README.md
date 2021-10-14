@@ -10,7 +10,7 @@ An encryption app that processes classified documents (text format) and remove c
 
 ## Running the app
 
-1. `cd` into encryption app.
+1. `cd` into encryption_app.
 
 2. Create a `.env` file with the following environment variables:
     ```
@@ -21,7 +21,8 @@ An encryption app that processes classified documents (text format) and remove c
     SAVE_LOCATION=./censored_documents/
     ```
     Note:
-    - KEYWORDS: A string of censored keywords and phrases separated by spaces orcommas. Phrases will be enclosed in single or double-quotes.
+    - KEYWORDS: A string of censored keywords and phrases separated by spaces or commas. Phrases should be enclosed in single or double-quotes.
+    - CASE_SENSITIVE: Specify whether the specified `KEYWORDS` should be case-sensitive (true), or not case-sensitive (false);
     - FILE_LOCATION: You may specify any directory, or save the file within the `./documents/` folder within the project directory.
     - FILE_NAME: Specify the name of the file without the extension. The file should be of type `.txt`.
     - SAVE_LOCATION: You may specify any directory, or save the file within the `./censored_documents/` folder within the project directory.
