@@ -1,0 +1,5 @@
+KEYWORDS=typesetting "Lorem Ipsum" 'of the' from
+CASE_SENSITIVE=false
+FILE_LOCATION=./documents/
+FILE_NAME=lorem_ipsum
+SAVE_LOCATION=./censored_documents/

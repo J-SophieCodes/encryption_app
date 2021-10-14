@@ -1,11 +1,12 @@
 require('dotenv').config();
+require('../src/createDotenv')();
 const parseKeys = require('../src/parseKeys');
 const encryptLine = require('../src/encryptLine');
 
 describe('The parseKey function', () => {
   test('returns key words and phrases', () => {
-    let keywords = "hello Sophie 'happy day'"
-    expect(parseKeys(keywords)).toEqual(["hello", "Sophie", "happy day"]);
+    const keywords = process.env.KEYWORDS;
+    expect(parseKeys(keywords)).toEqual(["typesetting", "Lorem Ipsum", "of the", "from"]);
   });
 });
 
